@@ -16,7 +16,7 @@ class Crawler:
         raise ValueError(f"No docker-compose.yml/yaml at {self.path}")
 
     def build(self):
-        subprocess.run(['docker-compose',
+        subprocess.run(['docker', 'compose',
             '-f', str(self.config),
             'build'],
             env={

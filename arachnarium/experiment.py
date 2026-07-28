@@ -46,7 +46,7 @@ class Experiment:
              as_file(files('arachnarium').joinpath(
                 'resources/docker-compose.base.yml')) as base_config:
                 if self.app.is_docker:
-                    docker_cmd = ['docker-compose', '-p', self.id,
+                    docker_cmd = ['docker', 'compose', '-p', self.id,
                         '-f', str(self.app.config),
                         '-f', str(base_config),
                         '-f', str(self.crawler.config),
@@ -60,7 +60,7 @@ class Experiment:
                         'EXPERIMENT_ID': self.id
                     })
                 else:
-                    docker_cmd = ['docker-compose', '-p', self.id,
+                    docker_cmd = ['docker', 'compose', '-p', self.id,
                         '-f', str(self.crawler.config),
                         'run',
                         '--rm', 'crawler'] + self.crawler_args
@@ -87,7 +87,7 @@ class Experiment:
     async def shutdown(self):
         self.logger.info('shutting down')
         self.process = await asyncio.create_subprocess_exec(
-                *['docker-compose', '-p', self.id,
+                *['docker', 'compose', '-p', self.id,
                 'down', '-v'],
                 stdout=subprocess.DEVNULL,  # maybe we need a debug mode in which we log the shutdown 
                 stderr=subprocess.DEVNULL,

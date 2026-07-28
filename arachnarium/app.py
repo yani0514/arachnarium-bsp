@@ -29,7 +29,7 @@ class App:
                     'APP_DOCKER_DIR': str(self.path.absolute()),
                     'APP_COVERAGE_DIR': '/tmp/nonexistent',
             })
-            subprocess.run(['docker-compose',
+            subprocess.run(['docker', 'compose',
                 '-f', str(self.config),
                 'build'],
                 env=env,
